@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>Random Noise image Generator</title>
+</head>
+<body>
+  
+  <canvas>
+    
+    
+  </canvas>
+  
+  <p>Random Noise Image Generator</p>
+  <script>
+  
+  let SIZE_X = 200;
+  let SIZE_Y = 200;
+  let MAX_R = 256;
+  let MAX_G = 256;
+  let MAX_B = 256;
+  let WIDTH = 300;
+  let HEIGTH = 300;
+  let ctx = null;
+
+// Create a red rectangle
+  
+function GENERATE()
+  {
+             let WIDTH = document.getElementById("WIDTH").value;
+         let HEIGHT = document.getElementById("HEIGHT").value;
+      
+             const canvas = document.createElement('canvas');
+canvas.width = WIDTH
+canvas.height = HEIGHT;
+  
+    
+    const ctx = canvas.getContext('2d');
+
+ for (let i =0;i<SIZE_X;i++)
+   {
+     for (let y = 0; y < SIZE_Y;y++)
+       {
+         
+         let VR = 0;//Math.floor(Math.random()*MAX_R);
+         let VG = 0;
+         let VB = 0;
+         
+         
+
+         
+         let MAX_R = document.getElementById("MAX_R").value;
+         let MAX_G = document.getElementById("MAX_G").value;
+         let MAX_B = document.getElementById("MAX_B").value;
+        
+         
+         let MR = document.getElementById("MR").value;
+         let MG = document.getElementById("MG").value;
+         let MB = document.getElementById("MB").value;
+        
+         let QR = document.getElementById("QR").value;
+         let QG = document.getElementById("QG").value;
+         let QB = document.getElementById("QB").value;
+         
+                  let TYPE = document.getElementById("colored").value;
+      
+        /**
+canvas.width = 200;
+canvas.height = 100;**/
+         
+
+         
+     if (MR > QR && MG > QG && MB > QB)
+         {
+        
+           //lert("Alerts Mrb must br higher tham all Qrgb");
+         }
+         SIZE_X = WIDTH;
+         SIZE_Y = HEIGTH;
+         if (TYPE == "colored")
+         {
+         if (Math.floor(Math.random() * MR) < QR)
+           {
+             VR = Math.floor(Math.random() * MAX_R);
+             
+           }
+           
+         if (Math.floor(Math.random() * MG) < QG)
+           {
+             VG = Math.floor(Math.random() * MAX_G);
+             
+           }
+                      
+         if (Math.floor(Math.random() * MB) < QB)
+           {
+             VB = Math.floor(Math.random() * MAX_B);
+             
+           }
+         }
+         else
+         {
+           let GREY = Math.floor(Math.random() * MAX_R) + Math.floor(Math.random() * MAX_G) + Math.floor(Math.random() * MAX_B);
+           let GC = Math.floor(Math.random() * (GREY / 3));
+                    if (Math.floor(Math.random() * MR) < QR)
+           {
+             VR = GC;
+             
+           }
+           
+         if (Math.floor(Math.random() * MG) < QG)
+           {
+             VG = GC;
+             
+           }
+                      
+         if (Math.floor(Math.random() * MB) < QB)
+           {
+             VB = GC;
+            
+           }
+           
+           VB = GC;
+           VR = GC;
+           VG = GC;
+         }
+        // console.log("type" + VR + " " + VG + " " + VB);
+           var cr = 'rgb('+
+    VR+','+
+    VG+','+
+    VB+')';
+
+ctx.fillStyle = cr;
+ctx.fillRect(i, y, 1, 1);
+       }
+   }
+   
+   document.getElementById("Imgs").innerText = "";
+   
+// Convert canvas content to data URL and create an image
+const dataURL = canvas.toDataURL('image/png');
+const img3 = new Image();
+img3.src = dataURL;
+   //document.body.appendChild();
+   
+document.getElementById("Imgs").appendChild(img3);
+  }
+  
+  </script>
+  <div id="Imgs"></div>
+     
+  <br>
+     <input id="MR" value="12">mr</input>
+  <br>
+  <input id="MG" value="12">mg</input>
+  
+  <br>
+  <input id="MB" value="12">mb</input>
+   
+  <br>
+     <input id="QR" value="6">qr</input>
+  <br>
+   <input id="QG" value="6">qg</input>
+  <br>
+  <input id="QB" value="7">qb</input>
+   
+  <br>
+     <br>
+   <input id="MAX_R" value="256">MAX R</input>
+       <br> 
+   <input id="MAX_G" value="256">MAX G</input>
+       <br>
+   <input id="MAX_B" value="256">MAX B</input>
+       <br>
+       <input id="WIDTH" value="200">WIDTH</input>
+       <br>
+       <input id="HEIGHT" value="200">HEIGHT</input>
+       <br>
+  <input id="colored" value="colored">colored/black_white</input>
+  <br>
+  <input id="seed" value="1000"></input>
+   <button onclick="GENERATE();">GENERATE</button>
+</body>
+</html>
